@@ -1,14 +1,29 @@
 import React from 'react'
 import Header from './Header'
+import Login from './Login'
+import Browse from './Browse'
+import {createBrowserRouter } from 'react-router-dom'
+import { RouterProvider } from 'react-router-dom'
 const Body = () => {
+  const appRouter = createBrowserRouter(
+    [
+      {
+        path: '/',
+        element: <Login/>
+      },
+      {
+        path: '/browse',
+        element: <Browse/>
+      }
+    ]
+  )
   return (
-    <div>
-        <Header/>
-        <div>
-            <img src='https://assets.nflxext.com/ffe/siteui/vlv3/893a42ad-6a39-43c2-bbc1-a951ec64ed6d/1d86e0ac-428c-4dfa-9810-5251dbf446f8/IN-en-20231002-popsignuptwoweeks-perspective_alpha_website_medium.jpg'
-            alt='logo'/>
-        </div>
+    
+ <div>
+  <RouterProvider router={appRouter}/>
     </div>
+    
+   
   )
 }
 
