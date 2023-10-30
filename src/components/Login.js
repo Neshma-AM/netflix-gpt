@@ -4,9 +4,9 @@ import { useState, useRef } from 'react'
 import { checkValidity } from '../utils/Validate'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import {auth} from '../utils/Firebase';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import { USER_AVATAR } from '../utils/constants';
 
 const Login = () => {
 
@@ -14,7 +14,6 @@ const [isSignIn, setIsSignIn] = useState(true);
 const [errorMessage, setErrorMessage] = useState("");
 const dispatch = useDispatch();
 
-const navigate = useNavigate();
 const nameRef = useRef(null);
 const emailRef = useRef(null);
 const passwordRef = useRef(null)
@@ -35,7 +34,7 @@ const toggleSignInForm = () => {
         // Signed up 
         const user = userCredential.user;
         updateProfile(user, {
-          displayName: nameRef.current.value, photoURL: "https://imageio.forbes.com/specials-images/imageserve/62d599ede3ff49f348f9b9b4/0x0.jpg?format=jpg&crop=821,821,x155,y340,safe&height=416&width=416&fit=bounds"
+          displayName: nameRef.current.value, photoURL: USER_AVATAR
         }).then(() => {
           // Profile updated!
           const {uid, email, displayName, photoURL } = auth.currentUser
@@ -45,12 +44,11 @@ const toggleSignInForm = () => {
             displayName: displayName,
             photoURL: photoURL
           }))
-          navigate("/browse")
+  
         }).catch((error) => {
           // An error occurred
-          navigate("/error")
+        setErrorMessage(error.message);
         });
-       console.log(user, "Current User data");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -63,8 +61,6 @@ const toggleSignInForm = () => {
    .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
-    navigate("/browse")
-    console.log(user, "Sign in correct");
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -72,7 +68,6 @@ const toggleSignInForm = () => {
     setErrorMessage("User not found");
   });
     }
-
   }
 
   return (

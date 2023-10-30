@@ -15,6 +15,21 @@
 - Implemented Sign out
 - Implemented on Auth State Change 
 - Updated our profile (bug occured here so we used dispatch inside update API to fix the bug)
+- BugFix: Sign up user diaplayName and profile picture update
+- BugFix: if user is not logged in redirect /browse to login page (this fix dint work in mine , check again)
+- Unsubscribed to the onAuthStateChanged callback
+- Add the hardcoded values to the constants files
+- Fetch movies from TMDB Public API 
+- Register to TMDB and create App to get Access token and API Key 
+- Get data from TMDB now playing movies list API 
+- Custom Hook for Now Playing Movies
+- Create MovieSlice
+- update store with movies data
+- Planning for MainCotainer and SecondaryContainer
+- Fetch data for trailer video
+- Update the store with trailer video data
+- Embeded the trailer youtube video and made it autoplay and mute
+- Added Tailwind classes to make the VideoBackground, VideoTitle i.e. MainContainer and all to look good
 
 
 
